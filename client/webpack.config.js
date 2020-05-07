@@ -13,7 +13,8 @@ module.exports = {
   // Where the bundle will be recorded.
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: 'dist'
   },
   module: {
     rules: [
