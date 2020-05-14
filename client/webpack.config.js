@@ -13,6 +13,11 @@ plugins.push(new webpack.ProvidePlugin({
   'jQuery': 'jquery/dist/jquery.js'
 }));
 
+plugins.push(new webpack.optimize.CommonsChunkPlugin({
+  name: 'vendor',
+  filename: 'vendor.bundle.js'
+}));
+
 if (process.env.NODE_ENV === 'production') {
   plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
   plugins.push(new babiliPlugin());
@@ -29,8 +34,10 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   // First module to be loaded.
-  entry: './app-src/app.js',
-  // Where the bundle will be recorded.
+  entry: {
+    app: './app-src/app.js',
+    vendor: ['jquery', 'bootstrap', 'reflect-metadata']
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
